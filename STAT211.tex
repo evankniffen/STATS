@@ -1,0 +1,179 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{mathrsfs}
+\usepackage{mathdots}
+\DeclareMathOperator{\sech}{sech}
+\title{\vspace{-2cm}\large \raggedright STAT 211 ---------------------------------------------------------------- Evan Kniffen}
+\date{\vspace{-2cm}} % Removed the date
+\begin{document}
+\maketitle
+\pagestyle{plain}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+
+\textbf{Jan.14 }
+\linebreak
+(def) A sample of size \(n\) is a simple random sample (SRS) if the selection process ensures every sample of size \(n\) has an equal probability of being selected. 
+
+(def) Selection bias can arise from voluntary samples and convenience sampling, and it leads to non-representative samples. 
+
+\textbf{Jan.16}
+\linebreak
+(def) The interquartile range (IQR) is defined by \(Q3-Q1 = IQR\)
+
+(def) A suspected extreme is an observation at least \(1.5\cdot IQR\) above \(Q3\) or below \(Q1\).
+
+(def) A probable extreme is an observation at least \(3\cdot IQR\) above \(Q3\) or below \(Q1\).
+
+\framebox{The human intuition is not probabilistic.}
+
+(def) The sample space is the set of all possible outcomes of a random experiment, denoted by \(\Omega\). 
+
+Ex: When we flip a coin once, \(\Omega = \{H,T\}\). If we flip a coin twice, \(\Omega = \{HH,HT,TH,TT\}\)
+
+(def) An event is an outcome (simple event), or collection of outcomes (compound event).
+
+Ex: The event of observing one tail is \(\{T\}\). The event such that the two flips result in at least one head is \(\{HH,HT,TH\}\).
+
+(def) The union of events \(A\) and \(B\) consists of all outcomes in \(A\) and \(B\) or both. \(A\cup B\).
+
+(def) The intersection of events \(A\) and \(B\) consists of all outcomes in both \(A\) and \(B\). \(A\cap B\).
+
+(def) The complement of \(A\) is the event consisting of all outcomes that are not in \(A\). \(A^c\)
+
+(def) If \(A\cap B = \emptyset\) then \(A\) and \(B\) are disjoint.
+
+(def) If \(A\) is a subset of \(B\), then an outcome being in \(A\) implies that outcome is in \(B\) as well. \(A \subset B\)
+
+DeMorgan's Laws:
+
+(thm) \((A\cup B)\cap C = (A\cap C)\cup(B\cap C)\) and \((A\cap B)\cup C = (A\cup C)\cap(B\cup C)\)
+
+(thm) \((A \cup B)^c = A^c \cap B^c\) and \((A \cap B)^c = A^c \cup B^c\)
+
+\textbf{Jan.23}\\
+\(P(A\cup B)=P(A)+P(B)-P(A\cup B)\)
+
+Ex: A card is drawn uniformly from a deck of 52 cards. What is the probability the card is a king \(P(K)\)? \[P(K) = \frac4{52} = \frac1{13}\]
+
+Suppose I tell you that it is a face card, what is \(P(K)\)?
+\[P(K) = \frac{3}{12} = \frac13\]
+
+(def) Conditional probability of the event \(A\) given the information that event \(B\) has occurred is denoted by \(P(A|B)\).\[P(A|B)=\frac{P(A\cap B)}{P(B)}\]
+
+Ex: If the outcome of rolling a fair die is known to be even, what is \(P(2)\)?
+\[
+P(A|B)=\frac{P(A\cap B)}{P(B)} \text{ where } \begin{cases} 
+      A = \{2\}\\
+      B = \{2,4,6\}
+   \end{cases}
+\]
+\[
+\implies \frac{P(\{2\}\cap \{2,4,6\})}{P(\{2,4,6\})} = \frac{P(\{2\})}{1/2} = \frac{1/6}{1/2} = \frac26 = \frac{1}3
+\]
+
+Note:
+\[
+P(A) = P(A|\Omega) = \frac{P(A\cap\Omega)}{P(\Omega)} = \frac{P(A)}1 = P(A)
+\]
+
+Ex: 40\% of bean seeds come from supplier A and 60\% come from supplier B. Seeds from supplier A have a 50\% germination rate while those from supplier B have 75\% germination rate. What is the probability that a randomly selected seeds came from supplier A and will germinate?
+\[
+P(G\cap A)=P(G|A)P(A) = .5\cdot.4 = .2
+\]
+
+(def) Two events \(A\) and \(B\)  are independent if one gives you no information about the other. 
+\[ A \text{ and } B \text{are independent } \iff P(A\cap B) = P(A)P(B) \text{ and } P(A|B) = P(A)
+\]
+
+Note: If \(A\) and \(B\) are independent and disjoint,
+\[(P(A)P(B) = P(A\cap B) = P(\emptyset) = 0) \implies ((P(A)=0)\wedge(P(B) = 0))\]
+
+Jan.28\\
+
+(thm) The Law of Total Probability
+\[P(A\cap B) = P(A)P(B|A)\]\[P(A\cap B\cap C) = P(A)P(B|A)P(C|A\cap B)\]
+
+(thm) Baye's Theorem
+\[P(B|A)=\frac{P(A\cap B)}{P(A)}=\frac{P(A|B)P(B)}{P(A)}\]
+
+Jan.30\\
+What is the probability that at least 2 people share the same birthday, in a group of \(n\) people: \(P(b_n)\)?
+
+Assume: No leap day (365 days); uniform probability assumption; independency.
+
+Appeal to the complement \(P(b_n^c)\)!
+
+\[P(b_2^c) = \sum_{j\not= k}P(p_1=d_j\cap p_2=d_k) = \sum_{j\not= k}\frac1{365^2}=\frac{365^2-365}{365}=\frac{364}{365}\]
+\[P(b_3^c) = P(b_3^c\cap b_2^c)\]
+This is because \(b_2^c\subset b_3^c\)
+\[P(b_3^c\cap b_2^c) = P(b_3^c|b_2^c)P(b_2^c) = \frac{363}{365}\cdot\frac{364}{365}\]
+We can show by induction that \[P(b_n^c) = \frac{365!}{(365-n)!}\cdot\frac{1}{365^n}\]\[\therefore P(b_n) = 1 - \frac{365!}{(365-n)!}\cdot\frac{1}{365^n}\]
+
+(def) A distribution is the list of the probabilities that the random variable, \(X\), takes on its possible values.
+
+(def) The probability mass function (pmf) of a discrete random variable is defined for every number \(x\) by: \(f(x) = P(X=x)\) where \(f:x\mapsto[0,1]\). "The probability that \(X\) takes the value \(x\)".
+
+(def) The cumulative distribution function (cdf) \(F(x)\) of a discrete random variable \(X\) with the pmf \(f(x)\) is defined by: \[F(x) = P(X\leq x) = \sum_{y:y\leq x}f(y)\]
+
+Let \(X\) be the number of heads when flipping a fair coin twice. \(X\in\{0,1,2\}\)
+\[\text{pmf} : f(x)=\begin{cases}
+1/4, & x=0\\
+1/2, & x=1\\
+1/4, & x=2\\
+0, & otherwise
+\end{cases}\]
+\[\text{cdf} : F(x)=\begin{cases}
+0, & x<0\\
+1/4, & 0\leq x < 1\\
+3/4, &  1\leq x < 2\\
+1, &  2\leq x \\ 
+\end{cases}\]
+
+(def) The Bernoulli Distribution:
+
+\[X= \begin{cases}
+    1 & \text{w/ probability } p\\
+    0 & \text{w/ probability } 1-p\\
+\end{cases}\]
+This is known as a Bernoulli random variable. And is equal to:
+\[P(X=x)=f(x)=\begin{cases}
+    p & x=1\\
+    1-p & x=0\\
+    0 & x\not=0\text{ or }1\\
+\end{cases}\]
+and:
+\[f(x)=\begin{cases}
+    p^x(1-p)^{1-x} & x=0\text{ or }1\\
+    0 & x\not=0\text{ or }1\\
+\end{cases}\]
+This can be extended to \(n\) trials:
+\[f(x)=\begin{cases}
+    (_x^n)\,p^x(1-p)^{n-x} & x=0,1,2,\dots,n\\
+    0 & otherwise\\
+\end{cases}\]
+
+Ex:\\
+What is the total number of available social security numbers?\\
+We have 9 slots and can put any of 10 things in those slots, therefore we have \(10^9\) possible combinations. 
+
+Ex:\\
+Suppose we flips a fair coin 10 times, what is our distribution?  \(X\sim Binomial(10,1/2)\)
+
+What is the prob. of exactly 4 heads? \(f(4)\) 
+
+What is the prob. of at most 3 heads? \(F(3)\) 
+
+What is the prob. of seeing heads between 5 and 7? \\\(P(5\leq X \leq 7) = P(4 < X \leq 7) = F(7)-F(4)\)
+
+What is the prob. of seeing exactly 2 tails? \(1-f(2)=f(8)\)
+
+Ex:\\
+Suppose 70\% of all purchases in a certain store are made w/ credit card. Let \(X\) denote the number of credit card uses in the next 10 purchases. Find the probability that there will be between 5 and 8 credit card purchases.\[P(5\leq x \leq7) = F(8)-F(4)\]\[=f(5)+f(6)+f(7)+f(8)\]\\
+In R, we can write this as \texttt{pbinom(8,10,.7)-pbinom(4,10,.7)} and see \(\approx .8033\).
+
+(def) Geometric Distribution, if we want to know how many trials we might see before the first success.
+\[P(X=x)=(1-p)^{x-1}p\]\[F(x)=\sum_{y\leq x}P(X=x)\]
+\end{document} 
